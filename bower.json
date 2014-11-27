@@ -1,0 +1,43 @@
+{
+  "name": "bootstrappify",
+  "version": "3.3.1",
+  "homepage": "https://github.com/furplag/bootstrappify",
+  "authors": [
+    "furplag <furplag@furplag.jp>"
+  ],
+  "description": "Bootstrappify is an extension that adding a few features for Bootstrap 3.",
+  "main": [
+    "dist/css/bootstrappify.css",
+    "dist/js/bootstrappify.js"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "_config.yml",
+    "CNAME",
+    "bower_components",
+    "/components",
+    "composer.json",
+    "CONTRIBUTING.md",
+    "docs",
+    "node_modules",
+    "js/tests",
+    "test",
+    "tests",
+    "test-infra"
+  ],
+  "dependencies": {
+    "jquery": ">=1.9.1",
+    "bootstrap": ">=3.3.1"
+  },
+  "devDependencies": {
+    "jquery-1x": "jquery#^1",
+    "components-webfontloader": "~1.5.2",
+    "html5shiv": "~3.7.2",
+    "respond-minmax": "~1.4.2",
+    "modernizr": "~2.8.3",
+    "fullpage.js": "~2.4.9",
+    "pygments": "~2.0.1"
+  }
+}

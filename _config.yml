@@ -1,0 +1,26 @@
+# Jekyll settings:
+markdown: kramdown
+encoding: UTF-8
+highlighter: pygments
+safe: true
+lsi: false
+
+# Permalinks
+permalink: pretty
+
+# Server
+source: docs
+destination: _gh_pages
+host: 0.0.0.0
+port: 9001
+baseurl: /
+url: localhost
+encoding: UTF-8
+
+# Site settings
+title: Bootstrappify
+description: Bootstrappify is an extension that adding a few features for Bootstrap 3.
+baseurl:
+version: 3.3.1
+repo: https://github.com/furplag/bootstrappify
+cdn: https://cdn.furplag-was.me/bootstrappify
