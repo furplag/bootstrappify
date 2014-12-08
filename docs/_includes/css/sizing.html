@@ -1,0 +1,24 @@
+<h2 class="page-header">{{ slide_title }}</h2>
+
+{% for class in site.data.toggles.css_class %}
+<h3>.{{ class | replace: " ", " and ." }}</h3>
+{% assign group_index = forloop.index %}
+<div class="well well-sm">
+  <label class="radio-inline">
+    <input class="{{ class }} small" type="radio" name="css-sizing-lg-example{{ group_index }}" value="">
+    .small
+  </label>
+  <label class="radio-inline">
+    <input class="{{ class }}" type="radio" name="css-sizing-lg-example{{ group_index }}" value="" checked>
+    Default
+  </label>
+  <label class="checkbox-inline">
+    <input class="{{ class }} large" type="checkbox" value="" disabled>
+    .large
+  </label>
+  <label class="checkbox-inline">
+    <input class="{{ class }} large" type="checkbox" value="" checked disabled>
+    .large
+  </label>
+</div>
+{% endfor %}

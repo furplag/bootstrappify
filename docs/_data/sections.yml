@@ -1,0 +1,35 @@
+- section: index
+  title: Bootstrappify
+  desc: Sometimes smart, and sometimes ugly.
+  centered: true
+  nav: true
+
+- section: getting-started
+  title: Getting Started
+  desc: Bootstrappify is an extension that adding a few features for Bootstrap 3.
+  nav: true
+  slide: true
+
+- section: css
+  title: CSS
+  desc: Some additional style.
+  nav: true
+  slide: true
+  sub:
+
+  - title: Checkbox
+    path: checkbox
+    centered: false
+
+  - title: Radio
+    path: radio
+    centered: false
+
+  - title: Control Sizing
+    path: sizing
+    centered: false
+
+- section: about
+  title: About
+  centered: true
+  nav: false

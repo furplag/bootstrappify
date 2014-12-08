@@ -1,0 +1,13 @@
+<!--[if lt IE 9]> <script src="{{ "/libs/js/jquery-1x/jquery.min.js" | prepend: site.baseurl }}"></script> <![endif]-->
+<!--[if gt IE 8]><!-->
+<script src="{{ "/libs/js/jquery.min.js" | prepend:site.baseurl }}"></script>
+<script src="{{ "/assets/js/vendor/arrive-2.0.0.min.js" | prepend:site.baseurl }}"></script>
+<!--<![endif]-->
+<script src="{{ "/libs/js/bootstrap.min.js" | prepend:site.baseurl }}"></script>
+<script src="{{ "/dist/js/bootstrappify.min.js" | prepend:site.baseurl }}"></script>
+{% if page.slug == "home" %}
+<script src="{{ "/libs/js/jquery.easings.min.js" | prepend:site.baseurl }}"></script>
+<script src="{{ "/libs/js/jquery.slimscroll.min.js" | prepend:site.baseurl }}"></script>
+<script src="{{ "/libs/js/jquery.fullPage.min.js" | prepend:site.baseurl }}"></script>
+{% endif %}
+<script src="{{ "/assets/js/docs.min.js" | prepend:site.baseurl }}"></script>

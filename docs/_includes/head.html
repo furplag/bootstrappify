@@ -1,0 +1,26 @@
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=1">
+<meta name="msapplication-TileColor" content="#f18d05">
+<meta name="msapplication-TileImage" content="{{ "/assets/icon/favicon-144x.png | prepend: site.url }}">
+<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+<meta name="description" content="{{ site.description }}">
+<link rel="stylesheet" href="{{ "/libs/css/bootstrap.min.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="{{ "/dist/css/bootstrappify.min.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="{{ "/assets/css/docs.min.css" | prepend: site.baseurl }}">
+<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+<script src="{{ "/libs/js/modernizr.js" | prepend: site.baseurl }}"></script>
+<!--[if lt IE 9]>
+  <script src="{{ "/libs/js/html5shiv.min.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/libs/js/respond.min.js" | prepend: site.baseurl }}"></script>
+  <link href="{{ "/libs/js/respond-proxy.html" | prepend: site.baseurl }}" id="respond-proxy" rel="respond-proxy" />
+  <link href="{{ "/libs/js/respond.proxy.gif" | prepend: site.baseurl }}" id="respond-redirect" rel="respond-redirect" />
+  <script src="{{ "/libs/js/respond.proxy.js" | prepend: site.baseurl }}"></script>
+<![endif]-->
+
+<!-- Favicons -->
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ "/assets/icon/favicon-152x.png | prepend: site.url }}">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ "/assets/icon/favicon-120x.png | prepend: site.url }}">
+<link rel="icon" href="{{ "/assets/icon/favicon.ico | prepend: site.url }}">
+</head>

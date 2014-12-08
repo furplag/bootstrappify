@@ -1,0 +1,38 @@
+<h2 class="page-header">{{ slide_title }}</h2>
+<h3>Bootstrap Default</h3>
+<div class="well well-sm">
+  {% for toggle_state in site.data.toggles.state %}
+  <label class="radio-inline">
+    <input type="radio" value="" {{ toggle_state }}>
+    Choose me
+  </label>
+  {% endfor %}
+</div>
+
+<h2 class="page-header">Direct Attach</h2>
+{% for class in site.data.toggles.css_class %}
+<h3>.{{ class | replace: " ", " and ." }}</h3>
+{% assign group_index = forloop.index %}
+<div class="well well-sm">
+  {% for toggle_state in site.data.toggles.state %}
+  <label class="radio-inline">
+    <input class="{{ class }}" type="radio" name="css-radio-example{{ group_index }}{% if toggle_state == "checked disabled" %}-locked{% endif %}" value="" {{ toggle_state }}>
+    Choose me
+  </label>
+  {% endfor %}
+</div>
+{% endfor %}
+
+<h2 class="page-header">within &lt;label /&gt;</h2>
+{% for class in site.data.toggles.css_class %}
+<h3>.{{ class | replace: " ", " and ." }}</h3>
+{% assign group_index = forloop.index %}
+<div class="well well-sm" {% if forloop.last %}style="margin-bottom: 100px;"{% endif %}>
+  {% for toggle_state in site.data.toggles.state %}
+  <label class="radio-inline {{ class }}">
+    <input class="{{ class }}" type="radio" name="css-radio-example-within-label{{ group_index }}{% if toggle_state == "checked disabled" %}-locked{% endif %}" value="" {{ toggle_state }}>
+    Choose me
+  </label>
+  {% endfor %}
+</div>
+{% endfor %}

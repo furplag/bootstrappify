@@ -1,0 +1,36 @@
+---
+layout: home
+slug: home
+---
+
+<main id="content" role="main">
+{% for section in site.data.sections %}
+  <div class="section">
+    <div class="{% if section.slide and {{section.sub | size}} > 0 %}slide {% endif %}{% if section.top %}forced-top {% endif %}container">
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 {% if section.centered == true %}text-center{% endif %}">
+          <h1 class="section-header">{{section.title}}</h1>
+          {% if {{section.desc}} %}<h1 class="read">{{section.desc}}</h1>{% endif %}
+          {% if section.slide != true %}
+{% include section/{{section.section}}.html %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% if section.slide and {{section.sub | size}} > 0 %}
+      {% for slide in section.sub %}
+    <div class="slide {% if slide.top %}forced-top {% endif %}container">
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 {% if slide.centered == true %}text-center{% endif %}">
+        {% assign slide_title = slide.title %}
+{% include {{ slide.path | prepend: "/" | prepend: section.section | append: ".html" }} param=slide_title %}
+        </div>
+      </div>
+    </div>
+      {% endfor %}
+    {% elsif section.slide %}
+{% include section/{{section.section}}.html %}
+    {% endif %}
+  </div>
+{% endfor %}
+</main>

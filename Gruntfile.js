@@ -16,15 +16,7 @@ module.exports = function (grunt) {
     return string.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
   };
 
-  var path = require('path');
-  var generateCommonJSModule = require('./grunt/bs-commonjs-generator.js');
   var configBridge = grunt.file.readJSON('./grunt/configBridge.json', { encoding: 'utf8' });
-
-  Object.keys(configBridge.paths).forEach(function (key) {
-    configBridge.paths[key].forEach(function (val, i, arr) {
-      arr[i] = path.join('./docs/assets', val);
-    });
-  });
 
   // Project configuration.
   grunt.initConfig({
@@ -33,13 +25,11 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*!\n' +
       ' * <%= pkg.name %> v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-      ' * Copyright 2014+ <%= pkg.author %>\n' +
+      ' * Copyright 2014 <%= pkg.author %>\n' +
       ' * Licensed under <%= pkg.license.type %> (<%= pkg.license.url %>)\n' +
       ' * <%= pkg.description %>\n' +
       ' * Based on Bootstrap (http://getbootstrap.com)\n' +
       ' */\n',
-    jqueryCheck: configBridge.config.jqueryCheck.join('\n'),
-    jqueryVersionCheck: configBridge.config.jqueryVersionCheck.join('\n'),
 
     // Task configuration.
     clean: {
@@ -87,7 +77,7 @@ module.exports = function (grunt) {
 
     concat: {
       options: {
-        banner: '<%= banner %>\n<%= jqueryCheck %>\n<%= jqueryVersionCheck %>',
+        banner: '<%= banner %>\n',
         stripBanners: false
       },
       dist: {
@@ -102,10 +92,10 @@ module.exports = function (grunt) {
       },
       core: {
         src: '<%= concat.dist.dest %>',
-        dest: '<%= concat.dist.dest %>.min.js'
+        dest: 'dist/js/<%= pkg.name %>.min.js'
       },
       docsJs: {
-        src: configBridge.paths.docsJs,
+        src: 'docs/assets/js/src/*.js',
         dest: 'docs/assets/js/docs.min.js'
       }
     },
@@ -185,8 +175,9 @@ module.exports = function (grunt) {
       },
       docs: {
         src: [
-          'docs/assets/css/src/docs.css',
-          'docs/assets/css/src/pygments-manni.css'
+          'docs/libs/css/jquery.fullPage.css',
+          'docs/libs/css/pygments.css',
+          'docs/assets/css/src/docs.css'
         ],
         dest: 'docs/assets/css/docs.min.css'
       }
@@ -236,7 +227,7 @@ module.exports = function (grunt) {
 
     jekyll: {
       docs: {
-        
+
       }
     },
 
@@ -260,16 +251,24 @@ module.exports = function (grunt) {
 
     watch: {
       src: {
-        files: '<%= jshint.core.src %>',
-        tasks: ['jshint:src', 'qunit', 'concat']
+        files: 'js/*.js',
+        tasks: ['jshint:core', 'qunit', 'concat']
       },
       test: {
-        files: '<%= jshint.test.src %>',
+        files: ['js/tests/**/*.js', '!js/tests/vendor/*.js'],
         tasks: ['jshint:test', 'qunit']
       },
       less: {
         files: 'less/**/*.less',
         tasks: 'less'
+      },
+      dev: {
+        files: ['less/**/*.less', 'js/*.js', 'docs/assets/js/src/*.js'],
+        tasks: ['dist', 'docs']
+      },
+      'pre-prod': {
+        files: ['less/**/*.less', 'js/*.js', 'docs/assets/js/src/*.js'],
+        tasks: ['test']
       }
     },
 
@@ -316,24 +315,24 @@ module.exports = function (grunt) {
           destPrefix: 'docs/libs'
         },
         files: {
-          'css/bootstrap.css': 'bootstrap/dist/css/bootstrap.css',
           'css/bootstrap.css.map': 'bootstrap/dist/css/bootstrap.css.map',
           'css/bootstrap.min.css': 'bootstrap/dist/css/bootstrap.min.css',
-          'css/fullPage.css': 'fullpage/jquery.fullPage.css',
-          'js/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
+          'css/jquery.fullPage.css': 'fullpage.js/jquery.fullPage.css',
+          'css/pygments.css': 'pygments/css/pastie.css',
+          'fonts/glyphicons-halflings-regular.eot': 'bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
+          'fonts/glyphicons-halflings-regular.svg': 'bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
+          'fonts/glyphicons-halflings-regular.ttf': 'bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
+          'fonts/glyphicons-halflings-regular.woff': 'bootstrap/dist/fonts/glyphicons-halflings-regular.woff',
           'js/bootstrap.min.js': 'bootstrap/dist/js/bootstrap.min.js',
           'js/webfont.js': 'components-webfontloader/webfont.js',
-          'js/fullPage.js': 'fullpage/jquery.fullPage.js',
-          'js/fullPage.min.js': 'fullpage/jquery.fullPage.min.js',
           'js/html5shiv.min.js': 'html5shiv/dist/html5shiv.min.js',
           'js/jquery.min.js': 'jquery/dist/jquery.min.js',
           'js/jquery.min.map': 'jquery/dist/jquery.min.map',
-          'js/jquery.js': 'jquery/dist/jquery.js',
           'js/jquery-1x/jquery.min.js': 'jquery-1x/dist/jquery.min.js',
           'js/jquery-1x/jquery.min.map': 'jquery-1x/dist/jquery.min.map',
-          'js/jquery-1x/jquery.js': 'jquery-1x/dist/jquery.js',
-          'js/jquery.easings.min.js': 'fullpage/vendors/jquery.easings.min.js',
-          'js/jquery.slimscroll.min.js': 'fullpage/vendors/jquery.slimscroll.min.js',
+          'js/jquery.easings.min.js': 'fullpage.js/vendors/jquery.easings.min.js',
+          'js/jquery.fullPage.min.js': 'fullpage.js/jquery.fullPage.min.js',
+          'js/jquery.slimscroll.min.js': 'fullpage.js/vendors/jquery.slimscroll.min.js',
           'js/modernizr.js': 'modernizr/modernizr.js',
           'js/respond-proxy.html': 'respond-minmax/cross-domain/respond-proxy.html',
           'js/respond.min.js': 'respond-minmax/dest/respond.min.js',
@@ -373,13 +372,13 @@ module.exports = function (grunt) {
   }
 
   grunt.registerTask('test', testSubtasks);
-  grunt.registerTask('test-js', ['jshint:core', 'jshint:test', 'jshint:grunt', 'jscs:core', 'jscs:test', 'jscs:grunt', 'qunit']);
+  grunt.registerTask('test-js', ['jshint:core', 'jshint:test', 'jscs:core', 'jscs:test', 'qunit']);
 
   // JS distribution task.
-  grunt.registerTask('dist-js', ['concat', 'uglify:core', 'commonjs']);
+  grunt.registerTask('dist-js', ['concat', 'uglify:core']);
 
   // CSS distribution task.
-  grunt.registerTask('less-compile', ['less:compileCore']);
+  grunt.registerTask('less-compile', ['bower-install-simple:prod', 'less:compileCore']);
   grunt.registerTask('dist-css', ['less-compile', 'autoprefixer:core', 'usebanner', 'csscomb:dist', 'cssmin:minifyCore']);
 
   // Full distribution task.
@@ -393,18 +392,12 @@ module.exports = function (grunt) {
   // This can be overzealous, so its changes should always be manually reviewed!
   grunt.registerTask('change-version-number', 'sed');
 
-  grunt.registerTask('commonjs', 'Generate CommonJS entrypoint module in dist dir.', function () {
-    var srcFiles = grunt.config.get('concat.bootstraphy.src');
-    var destFilepath = 'dist/js/npm.js';
-    generateCommonJSModule(grunt, srcFiles, destFilepath);
-  });
-
   // Docs task.
-  grunt.registerTask('docs-css', ['less:compileDocs', 'autoprefixer:docs', 'csscomb:docs', 'cssmin:docs']);
+  grunt.registerTask('bower-docs', ['bower-install-simple:docs', 'bowercopy:docs']);
+  grunt.registerTask('docs-css', ['less:compileDocs', 'autoprefixer:docs', 'csscomb:docs', 'bower-docs', 'cssmin:docs']);
   grunt.registerTask('lint-docs-css', ['csslint:docs']);
   grunt.registerTask('docs-js', 'uglify:docsJs');
   grunt.registerTask('lint-docs-js', ['jshint:assets', 'jscs:assets']);
-  grunt.registerTask('bower-docs', ['bower-install-simple:docs', 'bowercopy:docs']);
-  grunt.registerTask('docs', ['docs-css', 'lint-docs-css', 'docs-js', 'lint-docs-js', 'clean:docs', 'copy:docs', 'bower-docs']);
+  grunt.registerTask('docs', ['docs-css', 'lint-docs-css', 'docs-js', 'lint-docs-js', 'clean:docs', 'copy:docs']);
 
 };

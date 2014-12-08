@@ -1,0 +1,425 @@
+//
+// Toggles
+// --------------------------------------------------
+
+@media (min-width: 1px) {
+
+  @area: 20px;
+  @spacing: 2px;
+  @width: @font-size-base;
+  @border: 2px;
+  @border-color: @gray-dark;
+  @inner-width: (@width - (@border * 2));
+  @bg: #fff;
+  @indicator-bg: @gray-lighter;
+  @color: @link-color;
+  @hover: darken(@color, 10%);
+
+  .flat,
+  .switch {
+    input[type="radio"]&,
+    input[type="radio"],
+    input[type="checkbox"]&,
+    input[type="checkbox"] {
+      :not(.lt-ie9) & {
+        outline: none;
+        .opacity(0);
+        z-index: -1;
+      }
+      ~.ui-element {
+        position: relative;
+        display: inline-block;
+        width: @width;
+        height: @width;
+        margin-right: @spacing;
+        margin-bottom: -2px;
+        margin-left: -@area;
+        border: solid @border @border-color;
+        background-color: @bg;
+        cursor: pointer;
+        &:hover {border-color: @hover;}
+        &:before {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          display: inline-block;
+          width: 0;
+          height: 0;
+          margin-top: 0;
+          margin-left: 0;
+          background-color: @color;
+          content: '';
+          .transition(~'width .1s ease-in, height .1s ease-in, margin .1s ease-in');
+        }
+      }
+      &:hover,
+      &:focus {
+        ~.ui-element {border-color: @hover;}
+      }
+      &:checked {
+        ~.ui-element:before {
+          @checked-width: (@inner-width - (2 * 2));
+          @checked-position: floor((@checked-width / 2));
+          width: (@checked-width);
+          height: (@checked-width);
+          margin-top: -@checked-position;
+          margin-left: -@checked-position;
+        }
+      }
+    }
+    input[type="radio"].round&,
+    &.round input[type="radio"],
+    input[type="checkbox"].round&,
+    &.round input[type="checkbox"] {
+      ~ .ui-element,
+      ~ .ui-element:before {
+        border-radius: 50%;
+        transform: scale(.9999);
+      }
+    }
+  }
+
+  .switch {
+    input[type="radio"]&,
+    input[type="radio"],
+    input[type="checkbox"]&,
+    input[type="checkbox"] {
+      ~.ui-element {
+        width: (@area - @spacing);
+        height: @width;
+        margin-right: -@spacing;
+        margin-bottom: -2px;
+        &:before {
+          top: -1px;
+          left: -1px;
+          width: ((@border * 2) + @spacing);
+          height: (@width - @border);
+          border: @border solid @border-color;
+          background-color: @indicator-bg;
+          .transition(~'left .1s ease-in');
+        }
+      }
+      &:checked {
+        ~.ui-element {
+          background-color: @color;
+          &:before {
+            left: (@width - ((@border * 2) + @spacing) + 1);
+            width: ((@border * 2) + @spacing);
+            height: (@width - @border);
+            margin-top: 0;
+            margin-left: 0;
+          }
+        }
+      }
+    }
+    input[type="radio"].vertical&,
+    &.vertical input[type="radio"],
+    input[type="checkbox"].vertical&,
+    &.vertical input[type="checkbox"] {
+      ~ .ui-element{
+        width: @width;
+        height: (@area - @spacing);
+        margin-right: 0;
+        margin-bottom: (-(@spacing + 2));
+        margin-left: (-(@area - @spacing));
+        &:before {
+          top: (@width - ((@border * 2) + @spacing) + 1);
+          width: (@width - @border);
+          height: ((@border * 2) + @spacing);
+          .transition(~'top .1s ease-in');
+        }
+      }
+      &:checked {
+        ~.ui-element {
+          &:before {
+            top: -1px;
+            left: -1px;
+          }
+        }
+      }
+    }
+    input[type="radio"].round&,
+    &.round input[type="radio"],
+    input[type="checkbox"].round&,
+    &.round input[type="checkbox"] {
+      ~ .ui-element{
+        border-radius: floor((@width / 2));
+        &:before {
+          width: (@width - @border);
+          height: (@width - @border);
+          border-radius: floor(((@width - @border) / 2));
+        }
+      }
+      &:checked {
+        ~.ui-element {
+          &:before {
+            top: -1px;
+            left: (@area - @spacing - @width - 1);
+          }
+        }
+      }
+    }
+    input[type="radio"].round.vertical&,
+    &.round.vertical input[type="radio"],
+    input[type="checkbox"].round.vertical&,
+    &.round.vertical input[type="checkbox"] {
+      ~ .ui-element:before {top: (@area - @spacing - @width - 1);}
+      &:checked ~ .ui-element:before {
+        top: -1px;
+        left: -1px;
+      }
+    }
+  }
+
+  .flat,
+  .switch {
+    &.disabled input[type="radio"],
+    &[disabled] input[type="radio"],
+    input[type="radio"].disabled&,
+    input[type="radio"][disabled]&,
+    & input[type="radio"].disabled,
+    & input[type="radio"][disabled],
+    fieldset[disabled] input[type="radio"],
+    &.disabled input[type="checkbox"],
+    &[disabled] input[type="checkbox"],
+    input[type="checkbox"].disabled&,
+    input[type="checkbox"][disabled]&,
+    & input[type="checkbox"].disabled,
+    & input[type="checkbox"][disabled],
+    fieldset[disabled] input[type="checkbox"] {
+      ~ .ui-element {
+        border-color: @gray-light;
+        background-color: @gray-lighter;
+        &:before {
+          border-color: @gray-light;
+          background-color: @gray-light;
+        }
+      }
+    }
+  }
+
+  .switch {
+    &.disabled input[type="radio"],
+    &[disabled] input[type="radio"],
+    input[type="radio"].disabled&,
+    input[type="radio"][disabled]&,
+    & input[type="radio"].disabled,
+    & input[type="radio"][disabled],
+    fieldset[disabled] input[type="radio"],
+    &.disabled input[type="checkbox"],
+    &[disabled] input[type="checkbox"],
+    input[type="checkbox"].disabled&,
+    input[type="checkbox"][disabled]&,
+    & input[type="checkbox"].disabled,
+    & input[type="checkbox"][disabled],
+    fieldset[disabled] input[type="checkbox"] {
+      ~ .ui-element {
+        &:before {
+          background-color: @gray-lighter;
+        }
+      }
+      &:checked ~ .ui-element {
+        background-color: mix(@gray-light, @gray-lighter);
+      }
+    }
+  }
+
+  .large label,
+  label.large {
+    font-size: @font-size-large;
+    padding-top: @padding-large-vertical;
+    padding-bottom: @padding-large-vertical;
+  }
+  .small label,
+  label.small {
+    font-size: @font-size-small;
+    padding-top: @padding-small-vertical;
+    padding-bottom: @padding-small-vertical;
+  }
+
+  .flat {
+    input[type="radio"].large&,
+    &.large input[type="radio"],
+    input[type="checkbox"].large&,
+    &.large input[type="checkbox"] {
+      ~ .ui-element {
+        width: @font-size-large;
+        height: @font-size-large;
+        margin-right: (@spacing - (@font-size-large - @font-size-base));
+      }
+      &:checked {
+        ~.ui-element:before {
+          @checked-width: (@font-size-large - ((@border + 2) * 2));
+          @checked-position: floor((@checked-width / 2));
+          width: (@checked-width);
+          height: (@checked-width);
+          margin-top: -@checked-position;
+          margin-left: -@checked-position;
+        }
+      }
+    }
+    input[type="radio"].small&,
+    &.small input[type="radio"],
+    input[type="checkbox"].small&,
+    &.small input[type="checkbox"] {
+      ~ .ui-element {
+        width: @font-size-small;
+        height: @font-size-small;
+        margin-right: (@spacing - (@font-size-small - @font-size-base));
+      }
+      &:checked {
+        ~.ui-element:before {
+          @checked-width: (@font-size-small - ((@border + 2) * 2));
+          @checked-position: floor((@checked-width / 2));
+          width: (@checked-width);
+          height: (@checked-width);
+          margin-top: -@checked-position;
+          margin-left: -@checked-position;
+        }
+      }
+    }
+  }
+
+  .switch {
+    input[type="radio"].large&,
+    &.large input[type="radio"],
+    input[type="checkbox"].large&,
+    &.large input[type="checkbox"] {
+      ~.ui-element {
+        width: @area;
+        height: (@width + @spacing);
+        margin-right: (@spacing * -2);
+        &:before {
+          width: ((@border + @spacing) * 2);
+          height: (@width - @border + @spacing);
+        }
+      }
+      &:checked ~.ui-element:before {
+        left: (@area - (((@border * 2) + @spacing) * 2) + 1);
+        width: ((@border + @spacing) * 2);
+        height: (@width - @border + @spacing);
+        margin-top: 0;
+        margin-left: 0;
+      }
+    }
+
+    input[type="radio"].vertical.large&,
+    &.large.vertical input[type="radio"],
+    input[type="checkbox"].vertical.large&,
+    &.large.vertical input[type="checkbox"] {
+      ~ .ui-element {
+        width: (@width + @spacing);
+        height: @area;
+        margin-right: 0;
+        margin-bottom: (-(@spacing + 2));
+        margin-left: -@area;
+        &:before {
+          width: (@width - @border + @spacing);
+          height: ((@border + @spacing) * 2);
+          top: (@area - (((@border * 2) + @spacing) * 2) + 1);
+          left: -1px;
+        }
+      }
+      &:checked ~ .ui-element:before {
+        top: -1px;
+        left: -1px;
+      }
+    }
+
+    input[type="radio"].round.large&,
+    &.large.round input[type="radio"],
+    input[type="checkbox"].round.large&,
+    &.large.round input[type="checkbox"] {
+      ~ .ui-element{
+        border-radius: floor(((@width + @spacing) / 2));
+        &:before {
+          width: (@width + @spacing - @border);
+          height: (@width + @spacing - @border);
+          border-radius: floor(((@width + @spacing) / 2));
+        }
+      }
+      &:checked ~.ui-element:before {
+        top: -1px;
+        left: (@area - (@border * 2) - @width + 1);
+      }
+    }
+
+    input[type="radio"].round.vertical.large&,
+    &.large.round.vertical input[type="radio"],
+    input[type="checkbox"].round.vertical.large&,
+    &.large.round.vertical input[type="checkbox"] {
+      ~ .ui-element:before {top: (@area - (@border * 2) - @width + 1);}
+      &:checked ~ .ui-element:before {
+        top: -1px;
+        left: -1px;
+      }
+    }
+
+    input[type="radio"].small&,
+    &.small input[type="radio"],
+    input[type="checkbox"].small&,
+    &.small input[type="checkbox"] {
+      ~ .ui-element {
+        width: (@area - @spacing - (@width - @font-size-small));
+        height: @font-size-small;
+        margin-right: (-(@spacing) + ((@width - @font-size-small) * 2));
+        &:before {
+          height: (@font-size-small - @border);
+        }
+      }
+      &:checked ~.ui-element:before {
+        left: (@font-size-small - ((@border * 2) + @spacing) + 1);
+        height: (@font-size-small - @border);
+      }
+    }
+    input[type="radio"].vertical.small&,
+    &.small.vertical input[type="radio"],
+    input[type="checkbox"].vertical.small&,
+    &.small.vertical input[type="checkbox"] {
+      ~ .ui-element{
+        width: @font-size-small;
+        height: (@area - @spacing - (@width - @font-size-small));
+        &:before {
+          top: (@font-size-small - ((@border * 2) + @spacing) + 1);
+          width: (@font-size-small - @border);
+          height: ((@border * 2) + @spacing);
+        }
+      }
+      &:checked ~.ui-element:before {
+        top: -1px;
+        left: -1px;
+      }
+    }
+    input[type="radio"].round.small&,
+    &.small.round input[type="radio"],
+    input[type="checkbox"].round.small&,
+    &.small.round input[type="checkbox"] {
+      ~ .ui-element{
+        border-radius: floor((@font-size-small / 2));
+        &:before {
+          width: (@font-size-small - @border);
+          height: (@font-size-small - @border);
+          border-radius: floor(((@font-size-small - @border) / 2));
+        }
+      }
+      &:checked {
+        ~.ui-element {
+          &:before {
+            top: -1px;
+            left: (@area - @spacing - (@width - @font-size-small) - @font-size-small - 1);
+          }
+        }
+      }
+    }
+    input[type="radio"].round.vertical.small&,
+    &.small.round.vertical input[type="radio"],
+    input[type="checkbox"].round.vertical.small&,
+    &.small.round.vertical input[type="checkbox"] {
+      ~ .ui-element:before {top: (@area - @spacing - (@width - @font-size-small) - @font-size-small - 1);}
+      &:checked ~ .ui-element:before {
+        top: -1px;
+        left: -1px;
+      }
+    }
+  }
+}

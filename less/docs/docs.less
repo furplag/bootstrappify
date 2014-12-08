@@ -1,0 +1,110 @@
+// Import Bootstrap variables, mixins, utilities
+@import "../../bower_components/bootstrap/less/variables.less";
+@import "../../bower_components/bootstrap/less/mixins.less";
+
+// Core variables and mixins
+@import "../variables.less";
+@import "../mixins.less";
+
+body {
+  position: relative;
+}
+
+.navbar-toggle .icon-bar {
+  background-color: @gray-dark;
+}
+
+a, img {outline: none !important;}
+
+// fullPage
+
+.section.fp-section {
+  .section-header {
+    @media (min-width: @screen-sm-min) {
+      font-size: (@font-size-h1 * 2);
+    }
+    +.read {
+      font-size: @font-size-h3;
+      @media (min-width: @screen-sm-min) {
+        font-size: (@font-size-h3 * 2);
+      }
+    }
+  }
+  .fp-tableCell > .container,
+  .fp-tableCell > .container-fluid,
+  .fp-tableCell > .container-flex {
+    &.forced-top {
+      box-sizing: border-box;
+      height: 100%;
+      > .row {
+        box-sizing: inherit;
+        height: 100%;
+        padding-top: (@navbar-height - @line-height-computed);
+      }
+    }
+  }
+  .fp-slide.container,
+  .fp-slide.container-fluid,
+  .fp-slide.container-flex {
+    &.forced-top .fp-tableCell {
+      vertical-align: top;
+    }
+  }
+}
+
+.fp-controlArrow {
+  transform: scale(.9999);
+  @media (max-width: (@screen-sm-min - 1)) {
+    position: absolute;
+    top: 50%;
+    z-index: 2000;
+    display: block;
+    width: 0;
+    height: 0;
+    margin-top: floor((@font-size-h1 / -2));
+    &.fp-prev {
+      left: floor((@font-size-h1 / 4));
+      z-index: 2010;
+      border: floor((@font-size-h1 / 2)) solid transparent;
+      border-left-width: 0;
+      border-right-color: #fff;
+    }
+    &.fp-next {
+      right: floor((@font-size-h1 / 4));
+      z-index: 2020;
+      border: floor((@font-size-h1 / 2)) solid transparent;
+      border-right-width: 0;
+      border-left-color: #fff;
+    }
+  }
+}
+
+[data-menuanchor] {
+  > a {
+    color: @gray-light;
+  }
+  &.active > a {
+    display: block;
+    color: @link-hover-color;
+    &:before,
+    &:after {
+      position: absolute;
+      top: (floor((@font-size-base / 2)) + 1);
+      display: inline-block;
+      font-size: @font-size-large;
+      font-weight: 700;
+      color: inherit;
+      .opacity(.75);
+      @media (min-width: @screen-md-min) {
+        top: (@font-size-base - 1);
+      }
+    }
+    &:before {
+      left: floor((@font-size-base / 2));
+      content: '\007b';
+    }
+    &:after {
+      content: '\007d';
+    }
+  }
+}

@@ -1,0 +1,13 @@
+state:
+-
+- checked
+- disabled
+- checked disabled
+
+css_class:
+- flat
+- flat round
+- switch
+- switch vertical
+- switch round
+- switch round vertical

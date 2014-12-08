@@ -1,0 +1,11 @@
+<footer class="navbar navbar-default navbar-fixed-bottom" id="bottom" role="contentinfo">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav navbar-right" id="footer-navigation">
+    {% for section in site.data.sections %}
+      {% if section.nav != true %}
+      <li data-menuanchor="{{section.section}}"><a href="#{{section.section}}">{{section.title}}</a></li>
+      {% endif %}
+    {% endfor %}
+    </ul>
+  </div>
+</footer>

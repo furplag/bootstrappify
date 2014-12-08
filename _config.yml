@@ -13,7 +13,7 @@ source: docs
 destination: _gh_pages
 host: 0.0.0.0
 port: 9001
-baseurl: /
+baseurl:
 url: localhost
 encoding: UTF-8
 
@@ -22,5 +22,12 @@ title: Bootstrappify
 description: Bootstrappify is an extension that adding a few features for Bootstrap 3.
 baseurl:
 version: 3.3.1
-repo: https://github.com/furplag/bootstrappify
-cdn: https://cdn.furplag-was.me/bootstrappify
+repo:
+  url: https://github.com/furplag/bootstrappify
+  source:
+    zip: __repo__/archive/v__version__.zip
+    tar: __repo__/archive/v__version__.tar.gz
+    dist: __repo__/releases/download/v__version__/__name__-__version__-dist.zip
+    cdn: https://cdn.furplag-was.me/__name__/__version__
+author:
+  name: furplag

@@ -1,0 +1,47 @@
+// Toggles
+
+.toggle-variant(@area-size: 20px; @width: @font-size-base; @height: @font-size-base; @bg: #fff; @border: 2px; @border-color: @text-color; @state-color: @link-color; @state-hover-color: @link-hover-color) {
+  :not(.lt-ie9) & {
+    outline: none;
+    .opacity(0);
+    z-index: -1;
+  }
+  ~.ui-element {
+    position: relative;
+    display: inline-block;
+    width: @width;
+    height: @height;
+    margin-right: (@area-size - @width - (@border * 2));
+    margin-bottom: -2px;
+    margin-left: -@area-size;
+    border: solid @border @border-color;
+    cursor: pointer;
+    &:before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-top: 0;
+      margin-left: 0;
+      content: '';
+      .transition(~'all .1s ease-in');
+    }
+  }
+  .flat-variant(@bg; @border-color; @state-color; @state-hover-color)
+}
+
+.flat-variant(@bg: #fff; @border; @color; @hover-color) {
+  ~.ui-element {
+    border-color: @border;
+    background-color: @bg;
+    &:hover {border-color: @hover-color;}
+    &:before {background-color: @color;}
+  }
+}
+
+.circle() {
+  border-radius: 100%;
+  transform: scale(.9999);
+}
